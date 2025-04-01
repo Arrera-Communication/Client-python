@@ -11,10 +11,10 @@ async def main():
     await client.connectToServeur(server_uri)
 
     # Envoyer un message
-    await client.send_message("Bonjour depuis le client Python!")
+    await client.sendMessage("Bonjour depuis le client Python!")
 
     # Recevoir une réponse
-    await client.receive_message()
+    await client.receiveMessage()
 
     # Fermer la connexion
     # await client.close()
