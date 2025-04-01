@@ -13,6 +13,10 @@ def main():
         if response:
             print(f"Réponse reçue : {response}")
 
+        response = client.receiveMessage()
+        if response:
+            print(f"Réponse reçue : {response}")
+
         # Déconnexion
         client.disconnect()
 

@@ -33,7 +33,11 @@ class PArreraClient:
         if self.__connection:
             try:
                 response = self.__connection.recv()
-                return response
+                if (response == "Message Received"):
+                    return None
+                else :
+                    self.__connection.send("Message Received")
+                    return response
             except Exception as e:
                 return None
         else:
