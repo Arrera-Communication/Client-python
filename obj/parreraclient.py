@@ -1,25 +1,24 @@
-import websockets
-
+from websocket import create_connection
 
 class PArreraClient:
     def __init__(self):
         self.__uri = None
-        self.__connection = None  # Représente la connexion WebSocket
+        self.__connection = None
 
-    def connectToServeur(self, uri:str):
-        if (uri == ""):
+    def connectToServeur(self, uri: str) -> bool:
+        if not uri:
             return False
-        else :
-            self.__uri = uri
-            try:
-                self.__connection = websockets.connect(self.__uri)
-                return True
-            except Exception as e:
-                self.__connection = None
-                return False
 
+        self.__uri = uri
+        try:
+            # Connexion bloquante au serveur
+            self.__connection = create_connection(self.__uri)
+            return True
+        except Exception as e:
+            self.__connection = None
+            return False
 
-    def sendMessage(self, message):
+    def sendMessage(self, message: str) -> bool:
         if self.__connection:
             try:
                 self.__connection.send(message)
@@ -27,7 +26,7 @@ class PArreraClient:
             except Exception as e:
                 return False
         else:
-           return False
+            return False
 
     def receiveMessage(self):
         if self.__connection:
@@ -38,3 +37,14 @@ class PArreraClient:
                 return None
         else:
             return None
+
+    def disconnect(self) -> bool:
+        if self.__connection:
+            try:
+                self.__connection.close()
+                self.__connection = None
+                return True
+            except Exception as e:
+
+                return False
+        return True
