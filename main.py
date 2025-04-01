@@ -5,10 +5,10 @@ async def main():
     server_uri = "ws://127.0.0.1:12345"
 
     # Créer un client WebSocket
-    client = PArreraClient(server_uri)
+    client = PArreraClient()
 
     # Connexion au serveur
-    await client.connect()
+    await client.connectToServeur(server_uri)
 
     # Envoyer un message
     await client.send_message("Bonjour depuis le client Python!")
