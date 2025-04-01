@@ -1,7 +1,7 @@
 from obj.parreraclient import *
 
 def main():
-    client = PArreraClient()
+    client = PArreraClient("python-client")
 
     # Connexion au serveur
     if client.connectToServeur("ws://127.0.0.1:12345"):

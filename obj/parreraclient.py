@@ -1,18 +1,19 @@
 from websocket import create_connection
 
 class PArreraClient:
-    def __init__(self):
+    def __init__(self,nameSoftware: str):
         self.__uri = None
         self.__connection = None
+        self.__nameSoftware = nameSoftware
 
     def connectToServeur(self, uri: str) -> bool:
         if not uri:
             return False
-
         self.__uri = uri
         try:
             # Connexion bloquante au serveur
             self.__connection = create_connection(self.__uri)
+            self.__connection.send("namesoft "+self.__nameSoftware)
             return True
         except Exception as e:
             self.__connection = None
